@@ -1,0 +1,246 @@
+'name': 'ZuzuScript'
+'scopeName': 'source.zuzu'
+'fileTypes': [
+	'zzs'
+	'zzm'
+]
+'firstLineMatch': '^#!/.*\\bzuzu\\b'
+'patterns': [
+	{
+		'include': '#pod'
+	}
+	{
+		'include': '#comments'
+	}
+	{
+		'include': '#keywords'
+	}
+	{
+		'include': '#constants'
+	}
+	{
+		'include': '#numbers'
+	}
+	{
+		'include': '#operators'
+	}
+	{
+		'include': '#regexps'
+	}
+	{
+		'include': '#strings'
+	}
+]
+'repository':
+	'pod':
+		'patterns': [
+			{
+				'name': 'comment.block.documentation.pod.zuzu'
+				'begin': '^(=(?!cut\\b)\\w.*)$'
+				'beginCaptures':
+					'1':
+						'name': 'punctuation.definition.comment.begin.pod.zuzu'
+				'end': '^(=cut)\\s*$'
+				'endCaptures':
+					'1':
+						'name': 'punctuation.definition.comment.end.pod.zuzu'
+			}
+		]
+	'comments':
+		'patterns': [
+			{
+				'name': 'comment.line.double-slash.zuzu'
+				'match': '//.*$'
+			}
+			{
+				'name': 'comment.block.zuzu'
+				'begin': '/\\*'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.comment.begin.zuzu'
+				'end': '\\*/'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.comment.end.zuzu'
+			}
+		]
+	'keywords':
+		'patterns': [
+			{
+				'name': 'storage.type.class.zuzu'
+				'match': '\\b(class|trait|extends|with|but)\\b'
+			}
+			{
+				'name': 'storage.type.function.zuzu'
+				'match': '\\b(function|method|fn|static)\\b'
+			}
+			{
+				'name': 'keyword.control.flow.zuzu'
+				'match': '\\b(if|else|unless|while|for|switch|case|default|return|next|continue|last|try|catch|throw|die|do)\\b'
+			}
+			{
+				'name': 'storage.modifier.zuzu'
+				'match': '\\b(let|const|from|import|as|new|self|super)\\b'
+			}
+			{
+				'name': 'keyword.operator.word.zuzu'
+				'match': '\\b(and|or|xor|nand|not|in|instanceof|does|can|typeof|mod|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
+			}
+			{
+				'name': 'support.class.builtin.zuzu'
+				'match': '\\b(Array|Bag|Boolean|Class|Collection|Dict|Function|Number|Object|Pair|PairList|Set|String|Trait)\\b'
+			}
+			{
+				'name': 'support.function.builtin.zuzu'
+				'match': '\\b(warn|say|print|debug|assert)\\b'
+			}
+		]
+	'constants':
+		'patterns': [
+			{
+				'name': 'constant.language.boolean.zuzu'
+				'match': '\\b(true|false)\\b|[⊤⊥]'
+			}
+			{
+				'name': 'constant.language.null.zuzu'
+				'match': '\\bnull\\b'
+			}
+			{
+				'name': 'constant.other.empty-set.zuzu'
+				'match': '∅'
+			}
+		]
+	'numbers':
+		'patterns': [
+			{
+				'name': 'constant.numeric.zuzu'
+				'match': '\\b\\d+(?:\\.\\d+)?\\b'
+			}
+		]
+	'regexps':
+		'patterns': [
+			{
+				'name': 'string.regexp.zuzu'
+				'begin': '(?x)(?<=^|[\\s(\\[{,:;=!<>+\\-*%&|?~])/(?![/*])'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': '/[ig]*'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+				'patterns': [
+					{
+						'name': 'constant.character.escape.zuzu'
+						'match': '\\\\.'
+					}
+				]
+			}
+		]
+	'strings':
+		'patterns': [
+			{
+				'name': 'string.quoted.double.block.zuzu'
+				'begin': '"""'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': '"""'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+			}
+			{
+				'name': 'string.template.backtick.zuzu'
+				'begin': '`'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': '`'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+				'patterns': [
+					{
+						'name': 'constant.character.escape.zuzu'
+						'match': '\\\\.'
+					}
+					{
+						'name': 'meta.interpolation.zuzu'
+						'begin': '\\\$\\{'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.section.embedded.begin.zuzu'
+						'end': '\\}'
+						'endCaptures':
+							'0':
+								'name': 'punctuation.section.embedded.end.zuzu'
+						'patterns': [
+							{
+								'include': '$self'
+							}
+						]
+					}
+				]
+			}
+			{
+				'name': 'string.quoted.double.zuzu'
+				'begin': '"'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': '"'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+				'patterns': [
+					{
+						'name': 'constant.character.escape.zuzu'
+						'match': '\\\\.'
+					}
+				]
+			}
+		]
+	'operators':
+		'patterns': [
+			{
+				'name': 'keyword.operator.assignment.zuzu'
+				'match': ':=|\\+=|-=|\\*=|/=|×=|÷=|\\*\\*=|_=|\\?:='
+			}
+			{
+				'name': 'keyword.operator.comparison.zuzu'
+				'match': '==|!=|≠|<=|≤|>=|≥|<=>|≶|≷|≡|≢'
+			}
+			{
+				'name': 'keyword.operator.arithmetic.zuzu'
+				'match': '\\+|-|\\*\\*|\\*|×|/|÷|_|@\\?|@@|@'
+			}
+			{
+				'name': 'keyword.operator.logical.zuzu'
+				'match': '⋀|⋁|⊻|⊼|¬|~'
+			}
+			{
+				'name': 'keyword.operator.collection.zuzu'
+				'match': '∈|∉|⋃|⋂|\\\\|∖|⊂⊃|⊂|⊃'
+			}
+			{
+				'name': 'keyword.operator.increment-decrement.zuzu'
+				'match': '\\+\\+|--'
+			}
+			{
+				'name': 'keyword.operator.lambda.zuzu'
+				'match': '->|→|=>'
+			}
+			{
+				'name': 'punctuation.separator.zuzu'
+				'match': ',|;|\\?:|\\.\\.\\.|\\.|:'
+			}
+			{
+				'name': 'punctuation.section.braces.begin.zuzu'
+				'match': '\\{\\{|\\{|\\[|\\(|<<|«'
+			}
+			{
+				'name': 'punctuation.section.braces.end.zuzu'
+				'match': '\\}\\}|\\}|\\]|\\)|>>|»'
+			}
+		]

@@ -1,0 +1,5 @@
+'.source.zuzu':
+	'editor':
+		'commentStart': '// '
+		'increaseIndentPattern': '^\\s*.*(?:\\{[^}"\']*|\\[[^\]"\']*|\\([^\)"\']*)$'
+		'decreaseIndentPattern': '^\\s*[\\}\]\\)].*$'

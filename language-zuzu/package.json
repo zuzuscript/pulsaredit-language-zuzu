@@ -1,0 +1,25 @@
+{
+	"name": "language-zuzu",
+	"version": "0.1.0",
+	"description": "ZuzuScript language support for Atom and PulsarEdit.",
+	"keywords": [
+		"language",
+		"grammar",
+		"zuzu",
+		"zuzuscript",
+		"atom",
+		"pulsar"
+	],
+	"repository": "https://github.com/zuru-zuzu/language-zuzu",
+	"license": "MIT",
+	"engines": {
+		"atom": ">=1.0.0 <2.0.0"
+	},
+	"activationHooks": [],
+	"main": "./lib/main",
+	"contributes": {
+		"grammars": [
+			"./grammars/zuzu.cson"
+		]
+	}
+}
