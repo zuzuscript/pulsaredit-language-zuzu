@@ -3,3 +3,6 @@
 		'commentStart': '// '
 		'increaseIndentPattern': '^\\s*.*(?:\\{[^}"\']*|\\[[^\]"\']*|\\([^\)"\']*)$'
 		'decreaseIndentPattern': '^\\s*[\\}\]\\)].*$'
+		'foldStartPattern': '^\\s*(?:(?:async|static)\\s+){0,2}(?:class|trait|function|method)\\b.*\\{\\s*(?://.*)?$'
+		'foldEndPattern': '^\\s*\\}'
+		'nonWordCharacters': '/\\\\()"\':,.;<>~!@#%^&*|+=[]{}`?-'

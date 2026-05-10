@@ -5,6 +5,8 @@
 	'zzm'
 ]
 'firstLineMatch': '^#!/.*\\bzuzu\\b'
+'foldingStartMarker': '^\\s*(?:(?:async|static)\\s+){0,2}(?:class|trait|function|method)\\b.*\\{\\s*(?://.*)?$'
+'foldingStopMarker': '^\\s*\\}'
 'patterns': [
 	{
 		'include': '#pod'
@@ -22,13 +24,13 @@
 		'include': '#numbers'
 	}
 	{
-		'include': '#operators'
-	}
-	{
 		'include': '#regexps'
 	}
 	{
 		'include': '#strings'
+	}
+	{
+		'include': '#operators'
 	}
 ]
 'repository':
@@ -72,19 +74,23 @@
 			}
 			{
 				'name': 'storage.type.function.zuzu'
-				'match': '\\b(function|method|fn|static)\\b'
+				'match': '\\b(function|method|fn|static|async)\\b'
 			}
 			{
 				'name': 'keyword.control.flow.zuzu'
-				'match': '\\b(if|else|unless|while|for|switch|case|default|return|next|continue|last|try|catch|throw|die|do)\\b'
+				'match': '\\b(if|else|unless|while|for|switch|case|default|return|next|continue|last|try|catch|throw|die|do|await|spawn)\\b'
 			}
 			{
 				'name': 'storage.modifier.zuzu'
-				'match': '\\b(let|const|from|import|as|new|self|super)\\b'
+				'match': '\\b(let|const|from|import|as|new|self|super|weak)\\b'
 			}
 			{
 				'name': 'keyword.operator.word.zuzu'
 				'match': '\\b(and|or|xor|nand|not|in|instanceof|does|can|typeof|mod|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
+			}
+			{
+				'name': 'storage.modifier.accessor.zuzu'
+				'match': '\\b(get|set|clear|has)\\b'
 			}
 			{
 				'name': 'support.class.builtin.zuzu'
@@ -114,27 +120,14 @@
 		'patterns': [
 			{
 				'name': 'constant.numeric.zuzu'
-				'match': '\\b\\d+(?:\\.\\d+)?\\b'
+				'match': '\\b(?:0x[\\da-fA-F]+|0b[01]+|\\d+(?:\\.\\d+)?(?:e[+-]?\\d+)?)\\b'
 			}
 		]
 	'regexps':
 		'patterns': [
 			{
 				'name': 'string.regexp.zuzu'
-				'begin': '(?x)(?<=^|[\\s(\\[{,:;=!<>+\\-*%&|?~])/(?![/*])'
-				'beginCaptures':
-					'0':
-						'name': 'punctuation.definition.string.begin.zuzu'
-				'end': '/[ig]*'
-				'endCaptures':
-					'0':
-						'name': 'punctuation.definition.string.end.zuzu'
-				'patterns': [
-					{
-						'name': 'constant.character.escape.zuzu'
-						'match': '\\\\.'
-					}
-				]
+				'match': '/(?![/*=\\s])(?:\\\\.|[^/\\\\\\n])+/i?'
 			}
 		]
 	'strings':
@@ -149,6 +142,50 @@
 				'endCaptures':
 					'0':
 						'name': 'punctuation.definition.string.end.zuzu'
+			}
+			{
+				'name': 'string.quoted.single.block.zuzu'
+				'begin': "'''"
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': "'''"
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+			}
+			{
+				'name': 'string.template.backtick.block.zuzu'
+				'begin': '```'
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': '```'
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+				'patterns': [
+					{
+						'name': 'constant.character.escape.zuzu'
+						'match': '\\\\.'
+					}
+					{
+						'name': 'meta.interpolation.zuzu'
+						'begin': '\\\$\\{'
+						'beginCaptures':
+							'0':
+								'name': 'punctuation.section.embedded.begin.zuzu'
+						'end': '\\}'
+						'endCaptures':
+							'0':
+								'name': 'punctuation.section.embedded.end.zuzu'
+						'patterns': [
+							{
+								'include': '$self'
+							}
+						]
+					}
+				]
 			}
 			{
 				'name': 'string.template.backtick.zuzu'
@@ -184,6 +221,23 @@
 				]
 			}
 			{
+				'name': 'string.quoted.single.zuzu'
+				'begin': "'"
+				'beginCaptures':
+					'0':
+						'name': 'punctuation.definition.string.begin.zuzu'
+				'end': "'"
+				'endCaptures':
+					'0':
+						'name': 'punctuation.definition.string.end.zuzu'
+				'patterns': [
+					{
+						'name': 'constant.character.escape.zuzu'
+						'match': '\\\\.'
+					}
+				]
+			}
+			{
 				'name': 'string.quoted.double.zuzu'
 				'begin': '"'
 				'beginCaptures':
@@ -205,23 +259,7 @@
 		'patterns': [
 			{
 				'name': 'keyword.operator.assignment.zuzu'
-				'match': ':=|\\+=|-=|\\*=|/=|×=|÷=|\\*\\*=|_=|\\?:='
-			}
-			{
-				'name': 'keyword.operator.comparison.zuzu'
-				'match': '==|!=|≠|<=|≤|>=|≥|<=>|≶|≷|≡|≢'
-			}
-			{
-				'name': 'keyword.operator.arithmetic.zuzu'
-				'match': '\\+|-|\\*\\*|\\*|×|/|÷|_|@\\?|@@|@'
-			}
-			{
-				'name': 'keyword.operator.logical.zuzu'
-				'match': '⋀|⋁|⊻|⊼|¬|~'
-			}
-			{
-				'name': 'keyword.operator.collection.zuzu'
-				'match': '∈|∉|⋃|⋂|\\\\|∖|⊂⊃|⊂|⊃'
+				'match': '\\*\\*=|\\?:=|:=|~=|\\+=|-=|\\*=|/=|×=|÷=|_='
 			}
 			{
 				'name': 'keyword.operator.increment-decrement.zuzu'
@@ -229,18 +267,38 @@
 			}
 			{
 				'name': 'keyword.operator.lambda.zuzu'
-				'match': '->|→|=>'
+				'match': '->|→'
 			}
 			{
 				'name': 'punctuation.separator.zuzu'
-				'match': ',|;|\\?:|\\.\\.\\.|\\.|:'
+				'match': '\\?:|\\.\\.\\.|\\.\\(|,|;|\\.|:|\\?'
 			}
 			{
 				'name': 'punctuation.section.braces.begin.zuzu'
-				'match': '\\{\\{|\\{|\\[|\\(|<<|«'
+				'match': '<<<|\\{\\{|\\{|\\[|\\(|<<|«|⌊|⌈'
 			}
 			{
 				'name': 'punctuation.section.braces.end.zuzu'
-				'match': '\\}\\}|\\}|\\]|\\)|>>|»'
+				'match': '>>>|\\}\\}|\\}|\\]|\\)|>>|»|⌋|⌉'
+			}
+			{
+				'name': 'keyword.operator.comparison.zuzu'
+				'match': '<=>|==|!=|<=|>=|≠|≤|≥|≡|≢|≶|≷|=|<|>'
+			}
+			{
+				'name': 'keyword.operator.arithmetic.zuzu'
+				'match': '\\*\\*|\\+|-|\\*|×|/|÷|_|@\\?|@@|@|√'
+			}
+			{
+				'name': 'keyword.operator.logical.zuzu'
+				'match': '⋀|⋁|⊻|⊼|¬|!|~'
+			}
+			{
+				'name': 'keyword.operator.bitwise.zuzu'
+				'match': '&|\\^|\\|'
+			}
+			{
+				'name': 'keyword.operator.collection.zuzu'
+				'match': '∈|∉|⋃|⋂|\\\\|∖|⊂⊃|⊂|⊃'
 			}
 		]
