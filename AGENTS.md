@@ -1,27 +1,41 @@
-# AGENTS.md
-
-## Repository Scope
+# ZuzuScript Pulsar Language Package
 
 This repository contains the Atom/Pulsar ZuzuScript language package in
 `language-zuzu/`.
 
-Keep future work self-contained. Do not use sibling directories as language
-references. The local submodules provide the source material:
+Use Oxford English in documentation: mostly standard British English, with
+`-ize` word endings.
+
+## Relationship To Other Projects
+
+This package is editor tooling. It should track the language documented in
+the `userguide` submodule and examples from the `examples` submodule, but it
+must not invent syntax or depend on sibling checkouts.
+
+Local reference paths:
 
 - `docs/userguide/zuzuscript-guide/AA-bnf.md`
 - `docs/userguide/zuzuscript-guide/AB-operator-precedence.md`
 - `docs/userguide/operators-table.html`
 - `docs/examples/*.zzs`
 
-If those paths are missing, initialize the submodules before making syntax
+If those paths are missing, initialize submodules before making syntax
 decisions.
+
+## Project Shape
+
+- `language-zuzu/package.json` declares the Atom/Pulsar package.
+- `language-zuzu/grammars/zuzu.cson` is the grammar.
+- `language-zuzu/settings/language-zuzu.cson` defines editor settings such
+  as comments, word boundaries, and folding.
+- `language-zuzu/spec/` contains package tests.
 
 ## Keeping Syntax Current
 
 Update `language-zuzu/grammars/zuzu.cson` from the local BNF and operator
 appendix. Check:
 
-- current reserved words and contextual words;
+- reserved words and contextual words;
 - stale words that should no longer receive keyword/operator scopes;
 - word-like and symbolic operators, including Unicode aliases;
 - assignment, path, lambda, dynamic member-call, collection, floor/ceil,
@@ -46,10 +60,9 @@ Run the package tests from inside `language-zuzu/`:
 pulsar --package test
 ```
 
-If Pulsar is unavailable, at least inspect the CSON grammar for syntax
-errors with an available CSON parser and run equivalent static regex checks
-for current keywords, stale keyword removal, current operators, literals,
-and folding markers.
+If Pulsar is unavailable, at least inspect the CSON grammar with an
+available CSON parser and run equivalent static regex checks for current
+keywords, stale keyword removal, current operators, literals, and folding
+markers.
 
-Keep validation examples drawn from the local userguide and
-`docs/examples`.
+Keep validation examples drawn from the local userguide and `docs/examples`.
