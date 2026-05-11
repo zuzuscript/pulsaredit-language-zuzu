@@ -10,7 +10,7 @@
 		"atom",
 		"pulsar"
 	],
-	"repository": "https://github.com/zuru-zuzu/language-zuzu",
+	"repository": "https://github.com/zuruscript/pulsaredit-language-zuzu",
 	"license": "MIT",
 	"engines": {
 		"atom": ">=1.0.0 <2.0.0"
