@@ -78,7 +78,11 @@
 			}
 			{
 				'name': 'keyword.control.flow.zuzu'
-				'match': '\\b(if|else|unless|while|for|switch|case|default|return|next|continue|last|try|catch|throw|die|do|await|spawn)\\b'
+				'match': '\\bdefault\\b(?=\\s*:)'
+			}
+			{
+				'name': 'keyword.control.flow.zuzu'
+				'match': '\\b(if|else|unless|while|for|switch|case|return|next|continue|last|try|catch|throw|die|do|await|spawn)\\b'
 			}
 			{
 				'name': 'storage.modifier.zuzu'
@@ -86,7 +90,7 @@
 			}
 			{
 				'name': 'keyword.operator.word.zuzu'
-				'match': '\\b(and|or|xor|nand|not|in|instanceof|does|can|typeof|mod|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
+				'match': '\\b(and|or|xor|nand|not|in|instanceof|does|can|typeof|default|mod|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
 			}
 			{
 				'name': 'storage.modifier.accessor.zuzu'

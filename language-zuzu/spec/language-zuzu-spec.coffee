@@ -69,6 +69,13 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "<<<", "punctuation.section.braces.begin.zuzu")
 		expectScopesToContain(line, ">>>", "punctuation.section.braces.end.zuzu")
 
+		line = "let merged := opts default { host: \"localhost\" }; call(... merged)"
+		expectScopesToContain(line, "default", "keyword.operator.word.zuzu")
+		expectScopesToContain(line, "...", "punctuation.separator.zuzu")
+
+		line = "switch (mode: eq) { default: return null; }"
+		expectScopesToContain(line, "default", "keyword.control.flow.zuzu")
+
 	it "highlights current literals", ->
 		line = "let ok := ⊤; let no := ⊥; let empty := ∅;"
 		expectScopesToContain(line, "⊤", "constant.language.boolean.zuzu")
