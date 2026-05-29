@@ -52,7 +52,7 @@ describe "ZuzuScript grammar", ->
 		line = "x := y ~= /a/i -> z; x @? p; x **= 2; obj.(name)(1)"
 		expectScopesToContain(line, ":=", "keyword.operator.assignment.zuzu")
 		expectScopesToContain(line, "~=", "keyword.operator.assignment.zuzu")
-		expectScopesToContain(line, "/a/i", "string.regexp.zuzu")
+		expectScopesToContain(line, "a", "string.regexp.zuzu")
 		expectScopesToContain(line, "->", "keyword.operator.lambda.zuzu")
 		expectScopesToContain(line, "@?", "keyword.operator.arithmetic.zuzu")
 		expectScopesToContain(line, "**=", "keyword.operator.assignment.zuzu")
@@ -73,6 +73,13 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "default", "keyword.operator.word.zuzu")
 		expectScopesToContain(line, "...", "punctuation.separator.zuzu")
 
+		line = "let out := data |> trim(^^) ▷ parse_json(^^) ◁ source <| fallback;"
+		expectScopesToContain(line, "|>", "keyword.operator.chain.zuzu")
+		expectScopesToContain(line, "▷", "keyword.operator.chain.zuzu")
+		expectScopesToContain(line, "◁", "keyword.operator.chain.zuzu")
+		expectScopesToContain(line, "<|", "keyword.operator.chain.zuzu")
+		expectScopesToContain(line, "^^", "variable.language.placeholder.zuzu")
+
 		line = "switch (mode: eq) { default: return null; }"
 		expectScopesToContain(line, "default", "keyword.control.flow.zuzu")
 
@@ -81,6 +88,17 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "⊤", "constant.language.boolean.zuzu")
 		expectScopesToContain(line, "⊥", "constant.language.boolean.zuzu")
 		expectScopesToContain(line, "∅", "constant.other.empty-set.zuzu")
+
+		line = "say __file__; say __system__{inc}; say __global__; say __argc__;"
+		expectScopesToContain(line, "__file__", "constant.language.system.zuzu")
+		expectScopesToContain(line, "__system__", "constant.language.system.zuzu")
+		expectScopesToContain(line, "__global__", "constant.language.system.zuzu")
+		expectScopesToContain(line, "__argc__", "constant.language.system.zuzu")
+
+		line = "let BinaryString bytes := 'abc'; let re := /${name}/ig;"
+		expectScopesToContain(line, "BinaryString", "support.class.builtin.zuzu")
+		expectContainingScopesToContain(line, "${", "meta.interpolation.zuzu")
+		expectScopesNotToContain("from std/string import trim;", "/", "string.regexp.zuzu")
 
 		expectScopesToContain("let b := 'abc';", "abc", "string.quoted.single.zuzu")
 		expectScopesToContain("let b := '''abc''';", "'''", "string.quoted.single.block.zuzu")
