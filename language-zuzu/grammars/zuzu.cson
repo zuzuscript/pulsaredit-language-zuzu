@@ -90,7 +90,7 @@
 			}
 			{
 				'name': 'keyword.operator.word.zuzu'
-				'match': '\\b(and|or|xor|nand|not|in|instanceof|does|can|typeof|default|mod|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
+				'match': '\\b(?:and|or|xor|nand|nor|xnor|onlyif|butnot)\\?(?![A-Za-z0-9_])|\\b(and|or|xor|nand|nor|xnor|onlyif|butnot|not|in|instanceof|does|can|typeof|default|mod|divides|union|intersection|subsetof|supersetof|equivalentof|eqi|nei|gti|gei|lti|lei|cmpi|eq|ne|gt|ge|lt|le|cmp|abs|sqrt|floor|ceil|round|int|length|uc|lc)\\b'
 			}
 			{
 				'name': 'storage.modifier.accessor.zuzu'
@@ -128,7 +128,7 @@
 		'patterns': [
 			{
 				'name': 'constant.numeric.zuzu'
-				'match': '\\b(?:0x[\\da-fA-F]+|0b[01]+|\\d+(?:\\.\\d+)?(?:e[+-]?\\d+)?)\\b'
+				'match': '\\b(?:0x[\\da-fA-F]+|0b[01]+|0o[0-7]+|\\d+(?:\\.\\d+)?(?:E[+-]?\\d+)?)\\b'
 			}
 		]
 	'regexps':
@@ -328,7 +328,7 @@
 			}
 			{
 				'name': 'keyword.operator.comparison.zuzu'
-				'match': '<=>|==|!=|<=|>=|≠|≤|≥|≡|≢|≶|≷|=|<|>'
+				'match': '<=>|==|!=|<=|>=|≠|≤|≥|≡|≢|≶|≷|∣|∤|=|<|>'
 			}
 			{
 				'name': 'keyword.operator.arithmetic.zuzu'
@@ -336,7 +336,7 @@
 			}
 			{
 				'name': 'keyword.operator.logical.zuzu'
-				'match': '⋀|⋁|⊻|⊼|¬|!|~'
+				'match': '⋀\\?|⋁\\?|⊻\\?|⊼\\?|⊽\\?|↔\\?|⊨\\?|⊭\\?|⋀|⋁|⊻|⊼|⊽|↔|⊨|⊭|¬|!|~'
 			}
 			{
 				'name': 'keyword.operator.bitwise.zuzu'

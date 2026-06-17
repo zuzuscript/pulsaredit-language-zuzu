@@ -73,6 +73,23 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "default", "keyword.operator.word.zuzu")
 		expectScopesToContain(line, "...", "punctuation.separator.zuzu")
 
+		line = "let logical := a nor? b xnor c onlyif? d butnot e;"
+		expectScopesToContain(line, "nor?", "keyword.operator.word.zuzu")
+		expectScopesToContain(line, "xnor", "keyword.operator.word.zuzu")
+		expectScopesToContain(line, "onlyif?", "keyword.operator.word.zuzu")
+		expectScopesToContain(line, "butnot", "keyword.operator.word.zuzu")
+
+		line = "let divided := 2 divides 6 and 2 ∣ 6 and 4 ∤ 6;"
+		expectScopesToContain(line, "divides", "keyword.operator.word.zuzu")
+		expectScopesToContain(line, "∣", "keyword.operator.comparison.zuzu")
+		expectScopesToContain(line, "∤", "keyword.operator.comparison.zuzu")
+
+		line = "let symbolic := a ⊽? b ↔ c ⊨? d ⊭ e;"
+		expectScopesToContain(line, "⊽?", "keyword.operator.logical.zuzu")
+		expectScopesToContain(line, "↔", "keyword.operator.logical.zuzu")
+		expectScopesToContain(line, "⊨?", "keyword.operator.logical.zuzu")
+		expectScopesToContain(line, "⊭", "keyword.operator.logical.zuzu")
+
 		line = "let out := data |> trim(^^) ▷ parse_json(^^) ◁ source <| fallback;"
 		expectScopesToContain(line, "|>", "keyword.operator.chain.zuzu")
 		expectScopesToContain(line, "▷", "keyword.operator.chain.zuzu")
@@ -99,6 +116,14 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "BinaryString", "support.class.builtin.zuzu")
 		expectContainingScopesToContain(line, "${", "meta.interpolation.zuzu")
 		expectScopesNotToContain("from std/string import trim;", "/", "string.regexp.zuzu")
+
+		line = "let nums := [0x1F, 0b1111, 0o100, 1E3, 2.5E-7];"
+		expectScopesToContain(line, "0x1F", "constant.numeric.zuzu")
+		expectScopesToContain(line, "0b1111", "constant.numeric.zuzu")
+		expectScopesToContain(line, "0o100", "constant.numeric.zuzu")
+		expectScopesToContain(line, "1E3", "constant.numeric.zuzu")
+		expectScopesToContain(line, "2.5E-7", "constant.numeric.zuzu")
+		expectScopesNotToContain("let stale := 1e3;", "1e3", "constant.numeric.zuzu")
 
 		expectScopesToContain("let b := 'abc';", "abc", "string.quoted.single.zuzu")
 		expectScopesToContain("let b := '''abc''';", "'''", "string.quoted.single.block.zuzu")
