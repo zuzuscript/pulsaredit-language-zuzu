@@ -58,11 +58,12 @@ describe "ZuzuScript grammar", ->
 		expectScopesToContain(line, "**=", "keyword.operator.assignment.zuzu")
 		expectScopesToContain(line, ".(", "punctuation.separator.zuzu")
 
-		line = "a & b | c ^ d; !ok; √ 9; ⌊ 1.2 ⌋; <<< 1 >>>"
+		line = "a & b | c ^ d; !ok; # items; √ 9; ⌊ 1.2 ⌋; <<< 1 >>>"
 		expectScopesToContain(line, "&", "keyword.operator.bitwise.zuzu")
 		expectScopesToContain(line, "|", "keyword.operator.bitwise.zuzu")
 		expectScopesToContain(line, "^", "keyword.operator.bitwise.zuzu")
 		expectScopesToContain(line, "!", "keyword.operator.logical.zuzu")
+		expectScopesToContain(line, "#", "keyword.operator.arithmetic.zuzu")
 		expectScopesToContain(line, "√", "keyword.operator.arithmetic.zuzu")
 		expectContainingScopesToContain(line, "⌊", "punctuation.section.braces.begin.zuzu")
 		expectContainingScopesToContain(line, "⌋", "punctuation.section.braces.end.zuzu")
