@@ -1,6 +1,6 @@
 {
 	"name": "language-zuzu",
-	"version": "0.5.0",
+	"version": "0.7.0",
 	"description": "ZuzuScript language support for Atom and PulsarEdit.",
 	"keywords": [
 		"language",
